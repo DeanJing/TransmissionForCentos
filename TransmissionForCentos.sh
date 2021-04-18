@@ -56,7 +56,8 @@ yum update
 yum -y install transmission-daemon
 
 # SETTINGS.JSON
-/etc/init.d/transmission-daemon stop
+service transmission-daemon stop
+killall transmission-daemon
 wget --no-check-certificate https://raw.githubusercontent.com/DeanJing/TransmissionForDebian/master/settings.json
 chmod +x settings.json
 mkdir -p /var/lib/transmission-daemon/info
@@ -64,7 +65,8 @@ mv -f settings.json /var/lib/transmission-daemon/info/
 sed -i 's/^.*rpc-username.*/"rpc-username": "'$(echo $username)'",/' /var/lib/transmission-daemon/info/settings.json
 sed -i 's/^.*rpc-password.*/"rpc-password": "'$(echo $password)'",/' /var/lib/transmission-daemon/info/settings.json
 sed -i 's/^.*rpc-port.*/"rpc-port": '$(echo $port)',/' /var/lib/transmission-daemon/info/settings.json
-/etc/init.d/transmission-daemon start
+service transmission-daemon start
+
 
 # mkdir -p /home/transmission/Downloads/
 chmod -R 777 /var/lib/transmission-daemon/downloads
