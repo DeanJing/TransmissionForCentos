@@ -53,6 +53,7 @@
     "rpc-username": "", 
     "rpc-whitelist": "0.0.0.0", 
     "rpc-whitelist-enabled": false, 
+    "rpc-bind-address: "0.0.0.0",
     "scrape-paused-torrents-enabled": true, 
     "script-torrent-done-enabled": false, 
     "script-torrent-done-filename": "", 
