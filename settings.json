@@ -51,7 +51,7 @@
     "rpc-port": 1989, 
     "rpc-url": "/transmission/", 
     "rpc-username": "", 
-    "rpc-whitelist": "", 
+    "rpc-whitelist": "0.0.0.0", 
     "rpc-whitelist-enabled": false, 
     "scrape-paused-torrents-enabled": true, 
     "script-torrent-done-enabled": false, 
