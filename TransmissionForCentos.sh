@@ -14,7 +14,6 @@ echo -e "\033[31m =============================================================\
 # START
 yum update
 yum -y install epel-release
-yum -y install transmission
 yum -y install transmission-daemon
 
 # SETTINGS.JSON
