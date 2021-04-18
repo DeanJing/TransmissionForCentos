@@ -54,7 +54,8 @@ fi
 # START
 yum update
 yum -y install epel-release
-yum install tranmission transmission-daemon
+yum -y install transmission
+yum -y install transmission-daemon
 
 # SETTINGS.JSON
 systemctl stop transmission-daemon.service
