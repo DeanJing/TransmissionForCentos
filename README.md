@@ -1,0 +1,2 @@
+# TransmissionForCentos
+Centos安装Transmission一键脚本
