@@ -53,6 +53,7 @@ fi
 
 # START
 yum update
+yum -y install epel-release
 yum -y install transmission-daemon
 
 # SETTINGS.JSON
