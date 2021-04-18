@@ -10,46 +10,6 @@ echo -e "\033[31m =============================================================\
 # 2013.03.30
 # Transmission | Centos
 
-# VERSION CHOICE
-ver="latest"
-echo "Which version(latest OR stable) do you want to install:"
-read -p "Type latest or stable (latest):" ver
-if [ "$ver" = "" ]; then
-	ver="latest"
-fi
-
-# CONFIGURATION
-username=""
-read -p "Set username:" username
-if [ "$username" = "" ]; then
-	username="vpsoff.com"
-fi
-
-password=""
-read -p "Set password:" password
-if [ "$password" = "" ]; then
-	password="vpsoff.com"
-fi
-
-port=""
-read -p "Set port(1989):" port
-if [ "$port" = "" ]; then
-	port="1989"
-fi
-
-    get_char()
-    {
-    SAVEDSTTY=`stty -g`
-    stty -echo
-    stty cbreak
-    dd if=/dev/tty bs=1 count=1 2> /dev/null
-    stty -raw
-    stty echo
-    stty $SAVEDSTTY
-    }
-    echo ""
-    echo "Press any key to start...or Press Ctrl+c to cancel"
-    char=`get_char`
 
 # START
 yum update
@@ -59,29 +19,21 @@ yum -y install transmission-daemon
 
 # SETTINGS.JSON
 systemctl stop transmission-daemon.service
-
 wget --no-check-certificate https://raw.githubusercontent.com/DeanJing/TransmissionForCentos/master/settings.json
 chmod +x settings.json
 mkdir -p /var/lib/transmission-daemon/info
 mv -f settings.json /var/lib/transmission-daemon/info/
-sed -i 's/^.*rpc-username.*/"rpc-username": "'$(echo $username)'",/' /var/lib/transmission-daemon/info/settings.json
-sed -i 's/^.*rpc-password.*/"rpc-password": "'$(echo $password)'",/' /var/lib/transmission-daemon/info/settings.json
-sed -i 's/^.*rpc-port.*/"rpc-port": '$(echo $port)',/' /var/lib/transmission-daemon/info/settings.json
-systemctl start transmission-daemon.service
-
 mkdir /var/lib/transmission-daemon/downloads
 mkdir -p /home/transmission/Downloads/
 chmod -R 777 /var/lib/transmission-daemon/downloads
 systemctl stop firewalld.service            #停止firewall
 systemctl disable firewalld.service        #禁止firewall开机启动
-
+systemctl start transmission-daemon.service
 systemctl enable transmission-daemon.service
 # END
 clear
 echo "Done."
 echo " "
 echo "Web GUI: http://your ip:$port/"
-echo "username: $username"
-echo "password: $password"
 echo -e "\033[31m注意：请在VPS安全组以及BT面板里打开端口1989和51413\033[0m"
 chkconfig transmission-daemon on
