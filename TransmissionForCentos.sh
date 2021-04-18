@@ -54,10 +54,10 @@ fi
 # START
 yum update
 yum -y install epel-release
-yum -y install transmission-daemon
+yum install tranmission transmission-daemon
 
 # SETTINGS.JSON
-service transmission-daemon stop
+systemctl stop transmission-daemon.service
 
 wget --no-check-certificate https://raw.githubusercontent.com/DeanJing/TransmissionForCentos/master/settings.json
 chmod +x settings.json
@@ -66,7 +66,7 @@ mv -f settings.json /var/lib/transmission-daemon/info/
 sed -i 's/^.*rpc-username.*/"rpc-username": "'$(echo $username)'",/' /var/lib/transmission-daemon/info/settings.json
 sed -i 's/^.*rpc-password.*/"rpc-password": "'$(echo $password)'",/' /var/lib/transmission-daemon/info/settings.json
 sed -i 's/^.*rpc-port.*/"rpc-port": '$(echo $port)',/' /var/lib/transmission-daemon/info/settings.json
-service transmission-daemon start
+systemctl start transmission-daemon.service
 
 mkdir /var/lib/transmission-daemon/downloads
 mkdir -p /home/transmission/Downloads/
