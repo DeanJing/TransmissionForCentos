@@ -68,7 +68,7 @@ sed -i 's/^.*rpc-password.*/"rpc-password": "'$(echo $password)'",/' /var/lib/tr
 sed -i 's/^.*rpc-port.*/"rpc-port": '$(echo $port)',/' /var/lib/transmission-daemon/info/settings.json
 service transmission-daemon start
 
-
+mkdir /var/lib/transmission-daemon/downloads
 mkdir -p /home/transmission/Downloads/
 chmod -R 777 /var/lib/transmission-daemon/downloads
 systemctl stop firewalld.service            #停止firewall
