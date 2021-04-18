@@ -69,7 +69,7 @@ sed -i 's/^.*rpc-port.*/"rpc-port": '$(echo $port)',/' /var/lib/transmission-dae
 service transmission-daemon start
 
 
-# mkdir -p /home/transmission/Downloads/
+mkdir -p /home/transmission/Downloads/
 chmod -R 777 /var/lib/transmission-daemon/downloads
 systemctl stop firewalld.service            #停止firewall
 systemctl disable firewalld.service        #禁止firewall开机启动
