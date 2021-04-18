@@ -58,8 +58,8 @@ yum -y install transmission-daemon
 
 # SETTINGS.JSON
 service transmission-daemon stop
-killall transmission-daemon
-wget --no-check-certificate https://raw.githubusercontent.com/DeanJing/TransmissionForDebian/master/settings.json
+
+wget --no-check-certificate https://raw.githubusercontent.com/DeanJing/TransmissionForCentos/master/settings.json
 chmod +x settings.json
 mkdir -p /var/lib/transmission-daemon/info
 mv -f settings.json /var/lib/transmission-daemon/info/
@@ -71,7 +71,8 @@ service transmission-daemon start
 
 # mkdir -p /home/transmission/Downloads/
 chmod -R 777 /var/lib/transmission-daemon/downloads
-
+systemctl stop firewalld.service            #停止firewall
+systemctl disable firewalld.service        #禁止firewall开机启动
 # END
 clear
 echo "Done."
