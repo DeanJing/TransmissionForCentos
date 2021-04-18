@@ -73,6 +73,8 @@ mkdir -p /home/transmission/Downloads/
 chmod -R 777 /var/lib/transmission-daemon/downloads
 systemctl stop firewalld.service            #停止firewall
 systemctl disable firewalld.service        #禁止firewall开机启动
+
+systemctl enable transmission-daemon.service
 # END
 clear
 echo "Done."
@@ -81,4 +83,4 @@ echo "Web GUI: http://your ip:$port/"
 echo "username: $username"
 echo "password: $password"
 echo -e "\033[31m注意：请在VPS安全组以及BT面板里打开端口1989和51413\033[0m"
-
+chkconfig transmission-daemon on
